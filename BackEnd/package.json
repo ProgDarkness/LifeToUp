@@ -1,0 +1,48 @@
+{
+  "name": "intranetback",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "babel src -d dist && cp -r src/GraphQL/Types dist/GraphQL",
+    "start": "nodemon --delay 1000ms -e js,mjs,json,graphql src/index.js --exec babel-node",
+    "serve": "node dist/index.js",
+    "clean": "rimraf dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-core": "3.10.2",
+    "apollo-server-express": "3.10.2",
+    "axios": "0.27.2",
+    "bluebird": "3.7.2",
+    "cors": "2.8.5",
+    "crypto-js": "4.1.1",
+    "date-fns": "2.29.2",
+    "dotenv": "16.0.2",
+    "express": "4.18.1",
+    "graphql": "16.6.0",
+    "jsonwebtoken": "8.5.1",
+    "node-cron": "3.0.2",
+    "nodemailer": "6.7.8",
+    "oracledb": "5.5.0",
+    "pg-promise": "10.12.0",
+    "rimraf": "3.0.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.18.10",
+    "@babel/core": "7.19.0",
+    "@babel/node": "7.18.10",
+    "@babel/preset-env": "7.19.0",
+    "eslint": "8.23.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-config-standard": "17.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-n": "15.2.5",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "6.0.1",
+    "nodemon": "2.0.19",
+    "prettier": "2.7.1"
+  }
+}

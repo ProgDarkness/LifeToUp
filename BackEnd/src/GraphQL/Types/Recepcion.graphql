@@ -1,0 +1,85 @@
+type solicitudes {
+  co_cita_medica: Int
+  fe_solicitud: String
+  ced_solicitante: Int
+  nb_especialidad: String
+  tp_paciente: String
+  nb_parentesco: String
+  nu_cedula: Int
+  tx_nombre1: String
+  tx_nombre2: String
+  tx_apellido1: String
+  tx_apellido2: String
+  nb_locacion: String
+  fe_cita: String
+  co_estatus: Int
+  nu_edad: Int
+  nb_tipo_consulta: String
+  nb_turno: String
+  bl_orden: Boolean
+  bl_discapacidad: Boolean
+}
+
+type pacientes {
+  co_paciente: Int
+  co_nacionalidad: String
+  nu_cedula: Int
+  tx_nombre1: String
+  tx_nombre2: String
+  tx_apellido1: String
+  tx_apellido2: String
+  fe_nacimiento: String
+  co_sexo: String
+  di_habitacion: String
+  nu_telefono: String
+}
+
+type Query {
+  getSolicitudes(co_estatus: Int!, co_locacion: Int!, fe_cita: String!): [solicitudes]
+  getPacientes: [pacientes]
+  getLocalizacion: [ResultDropDown]
+}
+
+type Mutation {
+  getActualizarEstatusCita(inputCita: inputCita): Result!
+  insertPaciente(inputInsertPaciente: inputInsertPaciente!): Result!
+  getListaSolicitudesPorPaciente(cedulaPaciente: Int!): ResultListadoSolicitudes!
+  cancelarCitaPaciente(codCita: Int!): Result!
+}
+
+type ResultListadoSolicitudes {
+  citas: [ObjectCita]
+  paciente: ObjectPaciente
+}
+
+type ObjectPaciente {
+  tx_nombre1: String
+  tx_nombre2: String
+  tx_apellido1: String
+  tx_apellido2: String
+}
+
+type ObjectCita {
+  co_cita_medica: Int
+  fe_cita: String
+  nb_especialidad: String
+  nb_tipo_consulta: String
+  nb_locacion: String
+  nb_turno: String
+}
+
+input inputCita {
+  co_cita_medica: Int
+  co_status: Int
+}
+
+input inputInsertPaciente {
+  co_nacionalidad: String
+  nu_cedula: Int
+  tx_nombre1: String
+  tx_nombre2: String
+  tx_apellido1: String
+  tx_apellido2: String
+  fe_nacimiento: String
+  co_sexo: String
+}

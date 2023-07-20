@@ -1,0 +1,7 @@
+{
+  "host": "192.168.210.55",
+  "port": 5432,
+  "database": "siacper",
+  "user": "siacper_app",
+  "password": "1234"
+}

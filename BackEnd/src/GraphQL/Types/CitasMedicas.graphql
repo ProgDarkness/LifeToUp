@@ -1,0 +1,125 @@
+type Result {
+  status: Int
+  message: String
+  type: String
+  response: String
+}
+
+type SolicitudCita {
+  fe_cita: String
+  nb_especialidad: String
+  tx_nombre1: String
+  tx_apellido1: String
+  nu_cedula: Int!
+}
+
+type Query {
+  statusSolicitudCita(cedulaSolicitante: Int!): [SolicitudCita]
+  getparentescos: [ResultDropDown]!
+  getespecialidades: [ResultDropDownEspe]!
+  getTipoConsulta: [ResultDropDown]!
+  getLocalizacionPorEspecialidad(cod_especialidad: Int!): [ResultDropDown]
+  getDiasDisablePorEspecialidad(
+    cod_especialidad: Int!
+    co_locacion: Int!
+    co_turno: Int!
+  ): [String]
+  getDiasSemanalesTurnos(
+    cod_especialidad: Int!
+    co_locacion: Int!
+  ): ResultHorarios
+}
+
+type Mutation {
+  gettipopaciente(userNomina: Boolean!): [ResultDropDown]!
+  getDatosFuncionario(
+    cedula: Int!
+    nacionalidad: String!
+  ): ResultDatosFuncionario
+  solicitarCitaMedica(InputSolicitudCita: InputSolicitudCita!): Result!
+  getCitasCargasFamiliares(
+    id_personal: Int!
+    id_parentesco: Int!
+  ): ResultCargasFamiliares
+  getEdadNacimientoFuncionario(
+    cedula: Int!
+    nacionalidadU: String!
+  ): ResultFechaEdad
+}
+
+input InputSolicitudCita {
+  fe_solicitud: String
+  ced_solicitante: Int
+  co_especialidad: Int
+  co_tipo_paciente: Int
+  id_parentesco: Int
+  cedula_paciente: Int
+  nacionalidad_paciente: String
+  nombre_paciente: String
+  fecha_nacimiento: String
+  sexo: String
+  nu_edad: Int
+  co_locacion: Int
+  discapacidad: Boolean
+  fe_cita: String
+  co_tipo_consulta: Int
+  co_turno: Int
+  bl_orden: Boolean
+  nacionalidad: String
+}
+
+type ResultFechaEdad {
+  edad: Int
+  fecha_nacimiento: String
+}
+
+type ResultDatosFuncionario {
+  nombre1: String
+  nombre2: String
+  apellido1: String
+  apellido2: String
+  sexo: String
+  idpaciente: Int
+}
+
+type ResultDiasHabiles {
+  co_turno: Int
+  nu_cantidad_citas_diarias: Int
+}
+
+type ResultDropDown {
+  code: Int!
+  name: String!
+  co_dia_semana: Int!
+}
+
+type ResultDropDownEspe {
+  code: Int!
+  name: String!
+  orden: Boolean!
+}
+
+type ResultHorarios {
+  turnos: [ResultDropDown]
+}
+
+type ResultCargasFamiliares {
+  status: Int!
+  message: String!
+  type: String!
+  response: [CargaFamiliar]
+}
+
+type CargaFamiliar {
+  id: ID!
+  id_personal: Int!
+  id_parentesco: Int!
+  parentesco: String!
+  cedula: String
+  nombres: String!
+  apellidos: String!
+  fecha_nacimiento: String!
+  edad: Int!
+  discapacidad: String!
+  sexo: String
+}

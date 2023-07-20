@@ -1,0 +1,61 @@
+type Login {
+  id_usuario: ID!
+  codigo_empleado: ID!
+  id_rol: String!
+  nacionalidad: String!
+  cedula: ID!
+  nombre: String!
+  apellido: String!
+  correo: String
+  token: String
+}
+
+type Rol {
+  id: ID!
+  rol: String!
+}
+
+type Query {
+  login(input: InputLogin): String!
+  user: String!
+  roles: [Rol]
+  getMenu(idRol: Int!): [menuItem]
+  getRolAcceso(ruta: String!, idRol: Int!): resultAcceso
+}
+
+type resultAcceso {
+  status: Int!
+  message: String!
+  type: String!
+  response: accesoRol
+}
+
+type accesoRol {
+  id_permiso: String
+  tx_permisos: [Boolean]
+}
+
+type menuItem {
+  icon: String
+  label: String
+  command: String
+}
+
+type ResultNewUser {
+  status: Int
+  message: String
+  type: String
+  response: Boolean
+}
+
+type Mutation {
+  renovarToken: String!
+  newUser(cedula: Int!): ResultNewUser!
+  inserNewUser(cedula: Int!, correo: String!, clave: String!): Result!
+}
+
+input InputLogin {
+  usuario: String
+  clave: String
+  captcha: String
+}

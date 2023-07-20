@@ -1,0 +1,7 @@
+{
+  "host": "10.31.216.16",
+  "port": 5432,
+  "database": "re",
+  "user": "cami_app",
+  "password": "Qweasdzxc123$"
+}

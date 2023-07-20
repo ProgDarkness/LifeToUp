@@ -1,0 +1,54 @@
+type Query {
+  getPersonal: [personal]
+  getTipoPersonal: [tipoPersonal]
+  getEspecialidadesParaPersonal: [especialidadesParaPersonal]
+}
+
+type Mutation {
+  getCrearPersonal(cedula: Int!, nacionalidad: String!): CrearPersonal
+  insertarPersonal(InputGuardarPersonal: InputGuardarPersonal): Result!
+  eliminarPersonal(codigoPersonal:Int!): Result!
+}
+
+input InputGuardarPersonal {
+  ced_usuario: Int
+  co_empleado: Int
+  co_colegio_medicos: Int
+  co_ministerio_sanidad: Int
+  co_especialidad: Int
+  co_usuario: Int
+  co_tipo_personal: Int
+}
+
+type personal {
+  co_personal: Int
+  co_usuario: Int
+  ced_usuario: Int
+  nb_usuario: String
+  ap_usuario: String
+  nb_especialidad: String
+  co_empleado: Int
+  co_colegio_medicos: Int
+  co_ministerio_sanidad: Int
+  co_tipo_personal: Int
+  visible: Boolean
+}
+
+type especialidadesParaPersonal {
+  code: Int
+  name: String
+}
+
+type CrearPersonal {
+  nombre1: String
+  nombre2: String
+  apellido1: String
+  apellido2: String
+  codigo_empleado: Int
+  co_usuario: Int
+}
+
+type tipoPersonal {
+  code: Int
+  name: String
+}

@@ -1,0 +1,74 @@
+type Query {
+  getUsuarios: [Usuarios]
+  getRoles: [roles]
+  getRol(codeRol: Int!): [roles]
+  getRutas: [rutas]
+}
+
+type Mutation {
+  getCrearUsuario(cedula: Int!, nacionalidad: String!): CrearUsuario
+  crearUsuario(InputGuardarUsuario: InputGuardarUsuario!): Result!
+  crearRolPermiso(
+    InputRolPermisos: InputRolPermisos!
+    plusPermisos: Boolean!
+  ): ResultCR!
+  eliminarUsuario(cedulaUsuario: Int!): Result!
+  eliminarRol(codRol: Int!): Result!
+  actualizarPermisosRol(codPermiso: Int!, arrayPermisos: [Boolean]): Result!
+  eliminarPermisosRol(codPermiso: Int!, co_rol: Int!): Result!
+  resetUser(co_usuario: Int!): Result!
+}
+
+type rutas {
+  code: Int
+  name: String
+}
+
+type ResultCR {
+  status: Int
+  message: String
+  type: String
+  response: Int
+}
+
+type CrearUsuario {
+  nombre1: String
+  nombre2: String
+  apellido1: String
+  apellido2: String
+  codigo_empleado: Int
+}
+
+type roles {
+  code: Int
+  name: String
+  permisos: [Boolean]
+  ruta: String
+  idpermiso: Int
+}
+
+input InputGuardarUsuario {
+  ced_usuario: Int
+  nb_usuario: String
+  ap_usuario: String
+  nb2_usuario: String
+  ap2_usuario: String
+  co_rol: Int
+}
+
+input InputRolPermisos {
+  nombre: String
+  ruta: Int
+  permisos: [Boolean]
+  id_rol: Int
+}
+
+type Usuarios {
+  co_usuario: Int!
+  ced_usuario: ID
+  nb_usuario: String
+  ap_usuario: String
+  nb_rol: String
+  tx_correo: String
+  status_register: Boolean
+}

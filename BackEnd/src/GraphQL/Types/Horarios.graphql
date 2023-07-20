@@ -1,0 +1,107 @@
+type Mutation {
+  getHorariosDia(coDiaSemana: Int!): horario
+  getCrearPersonalHorario(
+    cedula: Int!
+  ): ResultCrearPersonalHorario
+  insertHorario(
+    InputGuardarPersonalHorario: InputGuardarPersonalHorario!
+  ): Result!
+  eliminarHorario(codigoHorarioPersonal: Int!): Result!
+  eliminarHorarioEspecialidad(codigoHorarioEspecialidad: Int!): Result!
+  insertOrUpdateHorarioEspecialidad(
+    inputHorarioEspecialidad: inputHorarioEspecialidad
+  ): Result!
+}
+
+type Query {
+  getTurnos: [turnos]
+  getTurnosPorHorarioEspe(co_especialidad: Int!): [turnos]
+  getTablaHorarios(coDiaSemana: Int!): [tablaHorarios]
+  getTablaHorariosEspecialidades(
+    coDiaSemana: Int!
+  ): [tablaHorariosEspecialidades]
+  getLocacion(co_especialidad: Int!): [locaciones]
+  getLocacionPorEspecialidad(co_especialidad: Int!): [locaciones]
+  getEspecialidadesHorarios: [especialidades]
+}
+
+input inputHorarioEspecialidad {
+  co_turno: Int
+  co_especialidad: Int
+  co_locacion: Int
+  nu_cantidad_citas_diarias: Int
+  permiso_editar: Boolean
+  co_horario_especialidad: Int
+}
+
+input InputGuardarPersonalHorario {
+  co_turno: Int
+  co_personal: Int
+  co_locacion: Int
+  co_especialidad: Int
+}
+
+type turnos {
+  co_turno: Int
+  nb_turno: String
+  hh_inicio: String
+  hh_fin: String
+}
+
+type ResultCrearPersonalHorario {
+  personalDatos: CrearPersonalHorario
+}
+
+type CrearPersonalHorario {
+  nombre1: String
+  nombre2: String
+  apellido1: String
+  apellido2: String
+  especialidad: String
+  co_personal: Int
+  co_especialidad: Int
+}
+
+type horario {
+  diaConsulta: diaConsulta
+}
+
+type diaConsulta {
+  nb_dia_semana: String
+}
+
+type tablaHorarios {
+  co_personal: Int
+  ced_usuario: Int
+  nb_usuario: String
+  ap_usuario: String
+  nb_especialidad: String
+  nb_turno: String
+  hh_inicio: String
+  hh_fin: String
+  nb_locacion: String
+  co_horario_personal: Int
+}
+
+type tablaHorariosEspecialidades {
+  co_especialidad: Int
+  nb_especialidad: String
+  co_turno: Int
+  nb_turno: String
+  hh_inicio: String
+  hh_fin: String
+  co_locacion: Int
+  nb_locacion: String
+  co_horario_especialidad: Int
+  nu_cantidad_citas_diarias: Int
+}
+
+type locaciones {
+  name: String
+  code: Int
+}
+
+type especialidades {
+  name: String
+  code: Int
+}

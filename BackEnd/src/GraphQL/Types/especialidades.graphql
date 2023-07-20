@@ -1,0 +1,41 @@
+type Query {
+  getEspecialidadesTabla: [especialidad]
+  getLocacionesCrearEspe: [locacionesEspe]
+}
+
+type especialidad {
+  co_especialidad: Int
+  nb_especialidad: String
+  co_locacion: Int
+  nb_locacion: String
+  co_especialidad_locacion: Int
+  bl_activo: Boolean
+  bl_orden: Boolean
+  bl_personal_disponible: Boolean
+}
+
+type locacionesEspe {
+  name: String
+  code: Int
+}
+
+type Mutation {
+  actualizarEspecialidad(
+    codigoEspecialidadLocacion: Int!
+    distinc: Boolean!
+  ): Result!
+  insertarEspecialidad(inputCrearEspecialidad: inputCrearEspecialidad!): Result!
+}
+
+input inputCrearEspecialidad {
+  co_locacion: Int
+  nb_especialidad: String
+  nb_especialidad_test: String
+  bl_orden: Boolean
+  bl_activo: Boolean
+  editarAgregarLocacion: Boolean
+  co_especialidad_locacion: Int
+  co_especialidad_edit: Int
+  co_locacion_agg: Int
+  bl_activo_agg: Boolean
+}
