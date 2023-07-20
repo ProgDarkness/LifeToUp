@@ -1,5 +1,5 @@
 {
-  "host": "192.168.210.55",
+  "host": "localhost",
   "port": 5432,
   "database": "cami",
   "user": "postgres",
