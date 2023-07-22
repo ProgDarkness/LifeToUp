@@ -18,7 +18,12 @@ import { Dialog } from 'primereact/dialog'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // import the icons you need
-import { faUser, faKey, faCheck } from '@fortawesome/free-solid-svg-icons'
+import {
+  faUser,
+  faKey,
+  faCheck,
+  faEnvelope
+} from '@fortawesome/free-solid-svg-icons'
 
 export default function Index() {
   const router = useRouter()
@@ -224,96 +229,6 @@ export default function Index() {
   return (
     <AppLayout marca={false}>
       <Toast ref={toast} />
-      <Dialog
-        visible={visiblebDialogNewUser}
-        resizable={false}
-        draggable={false}
-        showHeader={false}
-        style={{ width: '450px', height: '400px' }}
-        contentClassName="redondeo-xl"
-        contentStyle={{ backgroundColor: '#00454d' }}
-      >
-        <div className="flex justify-center">
-          <div className="flex flex-col text-white w-[26rem] redondeo-xl mt-2 text-center">
-            <div className="bg-[#2d8d97] redondeo-lg">
-              <h1 style={{ fontSize: '30px', fontWeight: '600' }}>USUARIO</h1>
-              <div>
-                <p>Debe Registrar su correo y contraseña </p>
-              </div>
-              <div>
-                <p>para ingresar al sistema</p>
-              </div>
-            </div>
-            <div className="bg-[#babd2bcc] redondeo-lg mt-5">
-              <div>
-                <p>- La contraseña debe tener por lo menos 6 digitos</p>
-              </div>
-              <div>
-                <p>- El correo debe ser una dirección válida @cne.gob.ve</p>
-              </div>
-            </div>
-            <div className="p-inputgroup h-8 mt-5">
-              <span className="p-inputgroup-addon span-sesion">
-                <FontAwesomeIcon icon={faUser} />
-              </span>
-              <InputText
-                id="user"
-                value={correoUser}
-                autoComplete="off"
-                placeholder="Correo electrónico"
-                className="redondeo-input-addon"
-                onChange={(e) => setCorreoUser(e.target.value)}
-              />
-            </div>
-            <div className="p-inputgroup h-8 mt-5">
-              <span className="p-inputgroup-addon span-sesion">
-                <FontAwesomeIcon icon={faKey} />
-              </span>
-              <Password
-                id="password"
-                placeholder="Contraseña"
-                className="redondeo-input-addon"
-                toggleMask
-                value={claveUser}
-                feedback={false}
-                onKeyPress={onEnter}
-                onChange={(e) => setClaveUser(e.target.value)}
-              />
-            </div>
-            <div className="p-inputgroup h-8 mt-5">
-              <span className="p-inputgroup-addon span-sesion">
-                <FontAwesomeIcon icon={faCheck} />
-              </span>
-              <Password
-                id="password"
-                placeholder="Confirmar Contraseña"
-                className="redondeo-input-addon"
-                value={confirClave}
-                feedback={false}
-                onKeyPress={onEnterR}
-                onChange={(e) => setConfirClave(e.target.value)}
-              />
-            </div>
-            <div className="grid grid-cols-1 justify-items-center mt-3">
-              <Button
-                id="btn-registrar"
-                icon="pi pi-sign-in"
-                className="redondeo-lg w-40 h-6 bg-[#40b4bf] text-black"
-                label="Entrar"
-                disabled={
-                  correoUser === null ||
-                  !correoUser.includes('@cne.gob.ve') ||
-                  claveUser === null ||
-                  claveUser?.length < 6 ||
-                  confirClave === null ||
-                  confirClave?.length < 6
-                }
-                onClick={validarContraseña}
-              />
-            </div>
-          </div>
-        </div>
-      </Dialog>
       <div className="w-full text-right pb-[7%] -mt-[9%]">
         <span className="text-white mr-3 font-bold text-xs md:text-base">{`${
           dias[hoy.getDay()]
@@ -322,19 +237,104 @@ export default function Index() {
         } de ${hoy.getFullYear()}`}</span>
       </div>
       <div className="w-full grid grid-cols-2">
-        <motion.div
-          variants={icon}
-          initial="hidden"
-          animate="visible"
-          transition={{
-            delay: 0.2,
-            default: { duration: 2, ease: 'easeInOut' },
-            fill: { duration: 2, ease: [1, 0, 0.8, 1] }
-          }}
-          className="w-2/3 mx-auto"
-        >
-          <Image src={emblema} />
-        </motion.div>
+        <div className="grid items-center">
+          <motion.div
+            animate={{
+              rotateY: [0, 360],
+              x: [250, 0],
+              opacity: [0, 1],
+              scale: [0, 1]
+            }}
+            transition={{
+              duration: 2,
+              type: 'Inertia',
+              stiffness: 100,
+              ease: 'linear'
+            }}
+          >
+            <Card className="w-[55%] h-[60vh] py-14 mx-auto text-center bg-[#62a0a7d7] text-white redondeo-xl">
+              <motion.div
+                variants={icon}
+                initial="hidden"
+                animate="visible"
+                transition={{
+                  delay: 0.5,
+                  default: { duration: 4, ease: 'easeInOut' },
+                  fill: { duration: 4, ease: [1, 0, 0.8, 1] }
+                }}
+                className="grid grid-cols-1 gap-6 w-4/5 mx-auto"
+              >
+                <h6
+                  style={{
+                    fontWeight: 'bold',
+                    fontSize: 30,
+                    fontFamily: 'Arial'
+                  }}
+                >
+                  Crea una cuenta
+                </h6>
+                <div className="p-inputgroup h-8">
+                  <span className="p-inputgroup-addon span-sesion">
+                    <FontAwesomeIcon icon={faUser} />
+                  </span>
+
+                  <InputText
+                    id="user"
+                    value={state.usuario}
+                    autoComplete="off"
+                    placeholder="Nombre de usuario"
+                    className="redondeo-input-addon"
+                    onChange={({ target: { value } }) =>
+                      setState((ps) => ({ ...ps, usuario: value }))
+                    }
+                  />
+                </div>
+                <div className="p-inputgroup h-8">
+                  <span className="p-inputgroup-addon span-sesion">
+                    <FontAwesomeIcon icon={faEnvelope} />
+                  </span>
+                  <Password
+                    id="password"
+                    placeholder="Correo electronico"
+                    className="redondeo-input-addon"
+                    value={state.clave_}
+                    feedback={false}
+                    onKeyPress={onEnter}
+                    onChange={({ target }) =>
+                      setState((ps) => ({ ...ps, clave_: target.value }))
+                    }
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 justify-items-center">
+                  <Button
+                    id="btn-loguear"
+                    icon="pi pi-sign-in"
+                    className="redondeo-lg w-40 h-6 bg-[#40b4bf] text-black"
+                    label="Registrarse"
+                    disabled={state.usuario === '' || state.clave_ === ''}
+                    onClick={comprobarNewUser}
+                  />
+                </div>
+                {/* <div className="grid grid-cols-1 text-left">
+                  <Link href="/ejemplos">
+                    <a className="flex flex-row items-center">
+                      <FontAwesomeIcon icon={faUnlockKeyhole} />
+                      <label className="ml-2 cursor-pointer">
+                        Recuperar clave
+                      </label>
+                    </a>
+                  </Link>
+
+                  {<Button
+                    className="rounded-full w-40 h-6 bg-[#40b4bf] text-black"
+                    label="Recuperar clave"
+                  />}
+                </div> */}
+              </motion.div>
+            </Card>
+          </motion.div>
+        </div>
 
         <div className="grid items-center">
           <motion.div
@@ -351,7 +351,7 @@ export default function Index() {
               ease: 'linear'
             }}
           >
-            <Card className="w-1/2 mx-auto text-center bg-[#00454d] text-white redondeo-xl">
+            <Card className="w-[55%] h-[60vh] py-14 mx-auto text-center bg-[#62a0a7d7] text-white redondeo-xl">
               <motion.div
                 variants={icon}
                 initial="hidden"
