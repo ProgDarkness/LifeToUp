@@ -43,7 +43,7 @@ export default {
     }
   `,
   CREAR_CUENTA: gql`
-    mutation CrearCuenta($input: InputRegistro!) {
+    mutation crearCuenta($input: InputRegistro!) {
       crearCuenta(input: $input) {
         status
         message

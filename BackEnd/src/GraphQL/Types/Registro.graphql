@@ -1,0 +1,22 @@
+type Mutation {
+  crearCuenta(input: InputRegistro!): Result!
+  crearClave(input: InputCrearClave!): Result!
+  recuperar(input: InputRecuperar!): Result!
+}
+
+input InputRegistro {
+  origin: String!
+  usuario: String!
+  correo: String!
+}
+
+input InputCrearClave {
+  token: String!
+  usuario: String!
+  clave: String!
+}
+
+input InputRecuperar {
+  origin: String!
+  cedula: String!
+}
